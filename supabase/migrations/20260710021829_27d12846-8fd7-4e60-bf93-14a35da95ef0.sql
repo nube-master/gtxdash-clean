@@ -1,0 +1,1 @@
+CREATE INDEX IF NOT EXISTS live_events_op_null_tmp ON public.live_events (id) WHERE operation_id IS NULL;

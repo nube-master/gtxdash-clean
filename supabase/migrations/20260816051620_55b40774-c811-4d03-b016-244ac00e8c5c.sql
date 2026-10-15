@@ -1,0 +1,2 @@
+DELETE FROM public.traffic_data_hourly WHERE date = '2026-08-16' AND created_at < '2026-08-16 00:00:00+00';
+DELETE FROM public.traffic_data WHERE date = '2026-08-16' AND created_at < '2026-08-16 00:00:00+00';

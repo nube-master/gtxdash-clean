@@ -1,0 +1,2 @@
+CREATE INDEX IF NOT EXISTS idx_live_viewers_op_started ON public.live_viewers (operation_id, started_at DESC);
+CREATE INDEX IF NOT EXISTS idx_live_viewers_started_at ON public.live_viewers (started_at DESC);

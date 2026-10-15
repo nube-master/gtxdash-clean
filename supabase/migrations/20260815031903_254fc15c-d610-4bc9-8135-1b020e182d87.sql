@@ -1,0 +1,1 @@
+DELETE FROM public.traffic_data WHERE date = '2026-08-15'; DELETE FROM public.meta_spend_realtime_safe WHERE sp_date = '2026-08-15';

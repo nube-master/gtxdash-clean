@@ -1,0 +1,38 @@
+-- F9 Bloco 1: REVOKE anon EXECUTE em 35 RPCs SECURITY DEFINER com operation_id opcional.
+-- Rollback: GRANT EXECUTE ON FUNCTION public.<nome>(<args>) TO anon;
+
+REVOKE EXECUTE ON FUNCTION public.get_cb_creative_sales(date, date, uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_cb_creative_sales_daily(date, date, uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_creative_traffic_aggregated(date, date, uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_creative_traffic_normalized_sp(date, date, uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_hourly_sales_by_account(date, date, uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_leaderboard_cb_sales(date, date, uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_leaderboard_redtrack(date, date, uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_leaderboard_sales(date, date, uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_leaderboard_traffic(date, date, uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_live_pacing_campaigns(uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_live_viewers_heatmap(timestamptz, text, text, text, uuid, uuid[]) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_offer_traffic_daily(uuid, uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_offer_vsl_metrics(text, date, date, uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_offers_kpi_metrics(uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_offers_kpi_metrics_range(date, date, uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_offers_revenue_range(date, date, uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_offers_revenue_stats(uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_offers_sales_intelligence(date, date, uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_offers_today_revenue(uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_offers_today_traffic(uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_offers_traffic_stats(uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_offers_vsl_counts(uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_orphan_campaign_tags_today(uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_spend_normalized_sp(date, date, uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_total_link_clicks(date, date, uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_traffic_aggregated(date, date, uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_traffic_by_campaign(date, date, uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_traffic_by_campaign_day(date, date, uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_traffic_clicks_total(date, date, uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_traffic_spend_by_account(date, date, uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_traffic_spend_by_account_normalized(date, date, uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_vsl_advanced_metrics(date, date, uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_vsl_retention_7d(uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_vsl_spend_breakdown(date, date, uuid) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.get_vsl_top_creatives(text, date, date, uuid, integer) FROM anon;

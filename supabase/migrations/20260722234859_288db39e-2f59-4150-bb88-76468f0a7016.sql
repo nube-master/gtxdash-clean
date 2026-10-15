@@ -1,0 +1,2 @@
+ALTER TABLE public.vsl_players ADD COLUMN IF NOT EXISTS operation_id uuid REFERENCES public.operations(id) ON DELETE CASCADE;
+CREATE INDEX IF NOT EXISTS idx_vsl_players_operation ON public.vsl_players(operation_id);

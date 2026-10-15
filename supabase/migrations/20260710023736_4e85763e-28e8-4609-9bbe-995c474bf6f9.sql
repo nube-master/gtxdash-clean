@@ -1,0 +1,1 @@
+DROP INDEX IF EXISTS public.live_events_op_null_tmp;

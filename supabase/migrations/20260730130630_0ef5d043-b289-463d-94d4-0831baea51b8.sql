@@ -1,0 +1,1 @@
+ALTER TABLE public.traffic_breakdowns ADD COLUMN IF NOT EXISTS inline_link_clicks integer NOT NULL DEFAULT 0;

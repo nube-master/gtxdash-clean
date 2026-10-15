@@ -1,0 +1,25 @@
+BEGIN;
+
+INSERT INTO traffic_data (operation_id, account_id, campaign_name, adset_name, ad_name, date, spend, impressions, clicks, updated_at) VALUES
+('8707b3f8-ab41-4a63-902c-9ab97fe50c8a','act_1246531708323610','HT 278746','HT 278746','HT 278746','2026-08-20',267.5,15736,1427,NOW()),
+('8707b3f8-ab41-4a63-902c-9ab97fe50c8a','act_1678452126568980','HT 232960','HT 232960','HT 232960','2026-08-20',0.52,19,2,NOW()),
+('8707b3f8-ab41-4a63-902c-9ab97fe50c8a','act_1056576076838554','HT 198904','HT 198904','HT 198904','2026-08-20',0.71,18,6,NOW()),
+('8707b3f8-ab41-4a63-902c-9ab97fe50c8a','act_1300776715534571','Sharkwares 1186','Sharkwares 1186','Sharkwares 1186','2026-08-20',69.47,2990,230,NOW()),
+('8707b3f8-ab41-4a63-902c-9ab97fe50c8a','act_1157423260787127','Sharkwares 1185','Sharkwares 1185','Sharkwares 1185','2026-08-20',731.5,28788,1958,NOW()),
+('8707b3f8-ab41-4a63-902c-9ab97fe50c8a','act_4518416995113290','HT 965450','HT 965450','HT 965450','2026-08-20',0.49,19,2,NOW()),
+('8707b3f8-ab41-4a63-902c-9ab97fe50c8a','act_914902035011378','HT 918383','HT 918383','HT 918383','2026-08-20',291.95,12334,1031,NOW()),
+('8707b3f8-ab41-4a63-902c-9ab97fe50c8a','act_1648237836725143','HT 267270','HT 267270','HT 267270','2026-08-20',28.61,3789,329,NOW()),
+('8707b3f8-ab41-4a63-902c-9ab97fe50c8a','act_2447877529027535','HT 885886','HT 885886','HT 885886','2026-08-20',607.9,29929,2691,NOW()),
+('8707b3f8-ab41-4a63-902c-9ab97fe50c8a','act_992398967122465','HT 274220','HT 274220','HT 274220','2026-08-20',50.8,2821,223,NOW()),
+('8707b3f8-ab41-4a63-902c-9ab97fe50c8a','act_2001512933899143','HT 616391','HT 616391','HT 616391','2026-08-20',0.38,11,0,NOW())
+ON CONFLICT (operation_id, account_id, date) DO UPDATE SET
+  spend=EXCLUDED.spend, 
+  impressions=EXCLUDED.impressions,
+  clicks=EXCLUDED.clicks, 
+  updated_at=NOW();
+
+DELETE FROM daily_totals_snapshot 
+WHERE operation_id='8707b3f8-ab41-4a63-902c-9ab97fe50c8a' 
+  AND date='2026-08-20';
+
+COMMIT;

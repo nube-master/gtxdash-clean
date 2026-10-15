@@ -1,0 +1,1 @@
+ALTER TABLE public.clickbank_audit ADD COLUMN IF NOT EXISTS affiliate text DEFAULT NULL;

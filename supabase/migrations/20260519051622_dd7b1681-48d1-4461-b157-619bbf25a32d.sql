@@ -1,0 +1,1 @@
+UPDATE public.offers SET apelido_interno = regexp_replace(apelido_interno, '^\[(.+)\]$', '\1') WHERE apelido_interno ~ '^\[.+\]$';

@@ -1,0 +1,76 @@
+-- F9 Bloco 1 parte 2: REVOKE do grupo PUBLIC (default implícito do Postgres).
+-- Motivo: REVOKE FROM anon isolado não basta se PUBLIC ainda tem EXECUTE.
+-- Preserva authenticated e service_role via GRANT explícito ao final.
+
+REVOKE EXECUTE ON FUNCTION public.get_cb_creative_sales(date, date, uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_cb_creative_sales_daily(date, date, uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_creative_traffic_aggregated(date, date, uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_creative_traffic_normalized_sp(date, date, uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_hourly_sales_by_account(date, date, uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_leaderboard_cb_sales(date, date, uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_leaderboard_redtrack(date, date, uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_leaderboard_sales(date, date, uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_leaderboard_traffic(date, date, uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_live_pacing_campaigns(uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_live_viewers_heatmap(timestamptz, text, text, text, uuid, uuid[]) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_offer_traffic_daily(uuid, uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_offer_vsl_metrics(text, date, date, uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_offers_kpi_metrics(uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_offers_kpi_metrics_range(date, date, uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_offers_revenue_range(date, date, uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_offers_revenue_stats(uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_offers_sales_intelligence(date, date, uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_offers_today_revenue(uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_offers_today_traffic(uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_offers_traffic_stats(uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_offers_vsl_counts(uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_orphan_campaign_tags_today(uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_spend_normalized_sp(date, date, uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_total_link_clicks(date, date, uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_traffic_aggregated(date, date, uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_traffic_by_campaign(date, date, uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_traffic_by_campaign_day(date, date, uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_traffic_clicks_total(date, date, uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_traffic_spend_by_account(date, date, uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_traffic_spend_by_account_normalized(date, date, uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_vsl_advanced_metrics(date, date, uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_vsl_retention_7d(uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_vsl_spend_breakdown(date, date, uuid) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.get_vsl_top_creatives(text, date, date, uuid, integer) FROM PUBLIC;
+
+-- Re-garante execução para roles legítimas (idempotente)
+GRANT EXECUTE ON FUNCTION public.get_cb_creative_sales(date, date, uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_cb_creative_sales_daily(date, date, uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_creative_traffic_aggregated(date, date, uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_creative_traffic_normalized_sp(date, date, uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_hourly_sales_by_account(date, date, uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_leaderboard_cb_sales(date, date, uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_leaderboard_redtrack(date, date, uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_leaderboard_sales(date, date, uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_leaderboard_traffic(date, date, uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_live_pacing_campaigns(uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_live_viewers_heatmap(timestamptz, text, text, text, uuid, uuid[]) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_offer_traffic_daily(uuid, uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_offer_vsl_metrics(text, date, date, uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_offers_kpi_metrics(uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_offers_kpi_metrics_range(date, date, uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_offers_revenue_range(date, date, uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_offers_revenue_stats(uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_offers_sales_intelligence(date, date, uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_offers_today_revenue(uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_offers_today_traffic(uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_offers_traffic_stats(uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_offers_vsl_counts(uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_orphan_campaign_tags_today(uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_spend_normalized_sp(date, date, uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_total_link_clicks(date, date, uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_traffic_aggregated(date, date, uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_traffic_by_campaign(date, date, uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_traffic_by_campaign_day(date, date, uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_traffic_clicks_total(date, date, uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_traffic_spend_by_account(date, date, uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_traffic_spend_by_account_normalized(date, date, uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_vsl_advanced_metrics(date, date, uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_vsl_retention_7d(uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_vsl_spend_breakdown(date, date, uuid) TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.get_vsl_top_creatives(text, date, date, uuid, integer) TO authenticated, service_role;

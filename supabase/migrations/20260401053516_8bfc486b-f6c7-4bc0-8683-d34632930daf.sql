@@ -1,0 +1,3 @@
+UPDATE public.app_settings 
+SET value = '[{"id": "ndm", "label": "NDM", "nickname": "guipiresp", "secret_env": "CLICKBANK_SECRET_KEY_NDM"}, {"id": "ndr", "label": "NDB", "nickname": "gtxndr", "secret_env": "GUIPADILHA"}, {"id": "ldg", "label": "LDG", "nickname": "gtxwl", "secret_env": "CLICKBANK_SECRET_KEY_LDG"}, {"id": "crt", "label": "CRT", "nickname": "nrptgtx", "secret_env": "CLICKBANK_SECRET_KEY_AILULA"}, {"id": "ndb2", "label": "NDB2", "nickname": "gtxndb2", "secret_env": "CLICKBANK_SECRET_KEY_NDB2"}]'::jsonb
+WHERE key = 'clickbank_vendors' AND operation_id = '0b758a2b-1b92-4769-b47b-416c567e320d';

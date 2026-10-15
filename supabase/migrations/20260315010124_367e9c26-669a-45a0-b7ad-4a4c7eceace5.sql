@@ -1,0 +1,1 @@
+UPDATE clickbank_audit SET product_name = 'NDR' WHERE date = '2026-03-14' AND affiliate IS NULL AND amount_usd = 235 AND product_name = 'NDM';

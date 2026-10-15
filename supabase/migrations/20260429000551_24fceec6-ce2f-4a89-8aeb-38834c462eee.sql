@@ -1,0 +1,1 @@
+DELETE FROM public.vturb_performance_daily WHERE utm_campaign = '(total)';

@@ -1,0 +1,1 @@
+ALTER TABLE public.meta_ad_accounts ADD COLUMN IF NOT EXISTS timezone text NOT NULL DEFAULT 'America/Sao_Paulo';

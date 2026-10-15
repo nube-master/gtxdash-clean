@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX IF NOT EXISTS uniq_meta_ad_accounts_op_acc ON public.meta_ad_accounts(operation_id, account_id);

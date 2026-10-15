@@ -1,0 +1,1 @@
+ALTER TABLE public.pacing_cooldowns ADD COLUMN IF NOT EXISTS last_set_budget_brl numeric;

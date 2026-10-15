@@ -1,0 +1,1 @@
+UPDATE meta_ad_accounts SET disable_reason = '' WHERE disable_reason LIKE '%act_act_%';

@@ -1,0 +1,1 @@
+ALTER TABLE public.traffic_data ADD COLUMN IF NOT EXISTS inline_link_clicks bigint NOT NULL DEFAULT 0;

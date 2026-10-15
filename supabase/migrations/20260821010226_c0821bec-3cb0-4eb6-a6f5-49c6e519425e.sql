@@ -1,0 +1,1 @@
+UPDATE meta_ad_accounts SET disable_reason = '' WHERE operation_id = '8707b3f8-ab41-4a63-902c-9ab97fe50c8a' AND (disable_reason LIKE '%act_act_%' OR disable_reason LIKE '%Sem acesso via API%');

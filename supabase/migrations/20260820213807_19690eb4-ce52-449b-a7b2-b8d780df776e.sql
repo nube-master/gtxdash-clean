@@ -1,0 +1,1 @@
+DELETE FROM public.daily_totals_snapshot WHERE date >= '2026-08-14';

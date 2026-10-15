@@ -1,0 +1,2 @@
+ALTER TABLE public.live_sale_attribution DROP CONSTRAINT live_sale_attribution_sale_source_check;
+ALTER TABLE public.live_sale_attribution ADD CONSTRAINT live_sale_attribution_sale_source_check CHECK (sale_source = ANY (ARRAY['CLICKBANK','DIGISTORE24','CARTPANDA','BUYGOODS','NEWSBREAK','HOTMART','OTHER']));

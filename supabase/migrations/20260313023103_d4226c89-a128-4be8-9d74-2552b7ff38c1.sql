@@ -1,0 +1,1 @@
+UPDATE notification_templates SET body_template = E'{{frase}}\n{{resultado}}', updated_at = now() WHERE type = 'status_operacao';

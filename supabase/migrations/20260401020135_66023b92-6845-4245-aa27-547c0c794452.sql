@@ -1,0 +1,1 @@
+ALTER TABLE public.operations ALTER COLUMN enabled_features SET DEFAULT '["dashboard","analytics","campaigns","meta_ia","creatives","vsls","vendas","central_financeira","planning","cashflow","contingencia","war_room","integrations","acessos"]'::jsonb;

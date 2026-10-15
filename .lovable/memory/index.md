@@ -1,0 +1,9 @@
+- [RedTrack API 4-page cap](mem://integrations/redtrack/api-4-page-cap) — /conversions devolve no máx 4 páginas (4000 linhas, mais novas primeiro); usar redtrack-deep-backfill fatiado por campaign_id
+- [Sale Approved Utmify Format](mem://features/notifications/sale-approved-utmify-format) — Push de venda: "Venda aprovada! | {{utm_campaign}}" + "Valor: $X.XX", sem emoji, use_legacy=false
+- [EDD Daily Meta Sync Fix](mem://features/edd/daily-meta-sync-fix) — token federation + skip filtro de nome + onConflict correto + cron dedicado do sync diário Meta da Escola do Dólar
+- [spend_brl Frozen Postmortem](mem://logic/financial/spend-brl-frozen-postmortem) — trigger recalcula BRL em UPDATE, guard de ratio 0.98-1.02, RPC get_spend_brl_consistency + cron 00h30 BRT
+- [COD Multi-Source + Import Manual](mem://features/cod/multi-source-and-manual-import) — cod_orders.source (sphere|fahto|manual), webhooks cod-webhook-fahto + genérico cod-webhook-platform e import retroativo em /dashboard-cod/import com dry-run e undo
+- [Checkout GTX Payload](mem://logic/cod/checkout-gtx-payload-shape) — payload aninhado data{}/commission{}/attribution{}; moeda pedido PLN ≠ comissão EUR; fix do push $0.00
+- [Traffic Data Rename Dupes](mem://logic/data-integrity/traffic-data-rename-dupes) — rename de campanha na Meta duplicava linha em traffic_data e inflava INVESTIDO; trigger dedupe por IDs
+- [Import COD Background Jobs](mem://features/cod/import-background-jobs) — cod_import_jobs + cod-import-worker em batches de 500, retomada por heartbeat, undo por import_job_id
+- [MCP Service Token](mem://infrastructure/mcp-service-token) — /mcp aceita Bearer estático (read-only, FAHTO) além do OAuth; arquivo da edge function é owned e não regenera

@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1791520738000,
+      "tag": "0000_fix_meta_ad_accounts_rls_insert",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791520767303,
+      "tag": "0001_add_with_check_to_all_policies",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791595551244,
+      "tag": "0002_meta_ad_accounts_super_admin_access",
+      "breakpoints": true
+    }
+  ]
+}

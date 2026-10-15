@@ -1,0 +1,1 @@
+DROP INDEX IF EXISTS public.idx_traffic_data_unique;

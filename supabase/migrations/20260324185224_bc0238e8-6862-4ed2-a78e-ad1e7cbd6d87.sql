@@ -1,0 +1,1 @@
+UPDATE clickbank_audit SET quantity = 0 WHERE transaction_type = 'SALE' AND (quantity = 12 OR quantity IS NULL);

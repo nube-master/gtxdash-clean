@@ -1,0 +1,360 @@
+{
+  "version": 1,
+  "sdk_version": "0.20.0",
+  "path": "/functions/v1/mcp",
+  "auth": {
+    "type": "oauth",
+    "issuer": "https://taeduxiandktefcwgspx.supabase.co/auth/v1",
+    "require_oauth_client_claim": false,
+    "accepted_audiences": [
+      "authenticated"
+    ]
+  },
+  "mcp": {
+    "server": {
+      "name": "traffic-os-mcp",
+      "version": "0.7.0",
+      "title": "TRAFFIC OS"
+    },
+    "tools": [
+      {
+        "name": "health_check",
+        "title": "Health Check",
+        "description": "Check if the Traffic OS MCP server is responding.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_today_totals",
+        "title": "Get Today Totals",
+        "description": "Alias for get_dashboard_snapshot.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_dashboard_snapshot",
+        "title": "Get Dashboard Performance Snapshot",
+        "description": "Returns today's authoritative Traffic OS totals and recent pacing alerts.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_creatives",
+        "title": "List Meta Creatives Performance",
+        "description": "Returns aggregated performance metrics per creative [AD##] for the last 30 days.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "min_spend": {
+              "description": "Minimum spend in BRL",
+              "type": "number"
+            },
+            "limit": {
+              "default": 50,
+              "description": "Maximum results",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_creative_by_code",
+        "title": "Get Creative Detail by Code",
+        "description": "Returns detailed metrics for a creative ID such as AD125.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "ad_code": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Creative code, for example AD125"
+            }
+          },
+          "required": [
+            "ad_code"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_ad_accounts",
+        "title": "List Meta Ad Accounts",
+        "description": "List Meta ad accounts linked to Traffic OS.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_orders",
+        "title": "List COD Affiliate Orders",
+        "description": "Lists webhook-received Sphere/Fahto COD orders for one operation, newest first, using opaque cursor pagination. Filters combine with AND. delivered_date is a calendar date (no time).",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "from": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+              "description": "Required UTC start date, YYYY-MM-DD"
+            },
+            "to": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+              "description": "Required UTC end date, YYYY-MM-DD"
+            },
+            "operation_id": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "description": "Required operation UUID"
+            },
+            "platform": {
+              "default": "all",
+              "type": "string",
+              "enum": [
+                "sphere",
+                "fahto",
+                "all"
+              ]
+            },
+            "status": {
+              "default": "all",
+              "type": "string",
+              "enum": [
+                "paid",
+                "pending",
+                "refused",
+                "expired",
+                "delivered",
+                "all"
+              ]
+            },
+            "program": {
+              "description": "Exact program id / slug, case-insensitive (AND filter)",
+              "type": "string",
+              "minLength": 1
+            },
+            "cursor": {
+              "description": "Opaque cursor returned by the previous page",
+              "type": "string"
+            },
+            "limit": {
+              "default": 100,
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200
+            },
+            "include_total": {
+              "default": true,
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "from",
+            "to",
+            "operation_id"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_accounts",
+        "title": "list_accounts",
+        "description": "Deprecated tool. Use the current aggregated Traffic OS tools instead.",
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_ads",
+        "title": "list_ads",
+        "description": "Deprecated tool. Use the current aggregated Traffic OS tools instead.",
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_adsets",
+        "title": "list_adsets",
+        "description": "Deprecated tool. Use the current aggregated Traffic OS tools instead.",
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_campaigns",
+        "title": "list_campaigns",
+        "description": "Deprecated tool. Use the current aggregated Traffic OS tools instead.",
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_kill_events",
+        "title": "list_kill_events",
+        "description": "Deprecated tool. Use the current aggregated Traffic OS tools instead.",
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_pacing_rules",
+        "title": "list_pacing_rules",
+        "description": "Deprecated tool. Use the current aggregated Traffic OS tools instead.",
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_scale_events",
+        "title": "list_scale_events",
+        "description": "Deprecated tool. Use the current aggregated Traffic OS tools instead.",
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_ad_insights",
+        "title": "get_ad_insights",
+        "description": "Deprecated tool. Use the current aggregated Traffic OS tools instead.",
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_campaign_insights",
+        "title": "get_campaign_insights",
+        "description": "Deprecated tool. Use the current aggregated Traffic OS tools instead.",
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_pacing_status",
+        "title": "get_pacing_status",
+        "description": "Deprecated tool. Use the current aggregated Traffic OS tools instead.",
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "adjust_campaign_budget",
+        "title": "adjust_campaign_budget",
+        "description": "Deprecated tool. Use the current aggregated Traffic OS tools instead.",
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "pause_campaign",
+        "title": "pause_campaign",
+        "description": "Deprecated tool. Use the current aggregated Traffic OS tools instead.",
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "resume_campaign",
+        "title": "resume_campaign",
+        "description": "Deprecated tool. Use the current aggregated Traffic OS tools instead.",
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,2 @@
+ALTER TABLE public.live_viewers ADD COLUMN IF NOT EXISTS ip_hash_c24 TEXT;
+CREATE INDEX IF NOT EXISTS idx_live_viewers_ip_hash_c24_started ON public.live_viewers (ip_hash_c24, started_at DESC) WHERE ip_hash_c24 IS NOT NULL;

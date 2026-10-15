@@ -1,0 +1,1 @@
+UPDATE public.traffic_data t SET operation_id = a.operation_id FROM public.meta_ad_accounts a WHERE t.account_id = a.account_id AND a.operation_id IS NOT NULL AND t.operation_id IS NULL AND t.date >= '2026-03-31';

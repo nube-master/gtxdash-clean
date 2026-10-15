@@ -1,0 +1,1 @@
+ALTER TABLE public.planning_goals ADD COLUMN margin_goal numeric NOT NULL DEFAULT 0;

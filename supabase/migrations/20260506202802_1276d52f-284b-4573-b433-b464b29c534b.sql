@@ -1,0 +1,1 @@
+UPDATE public.offers SET vendors_clickbank = '{}'::text[] WHERE apelido_interno = 'MMPB';

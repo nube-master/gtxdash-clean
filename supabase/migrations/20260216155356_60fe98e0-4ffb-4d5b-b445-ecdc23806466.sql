@@ -1,0 +1,1 @@
+ALTER TABLE public.sales_data ADD COLUMN store text DEFAULT null;

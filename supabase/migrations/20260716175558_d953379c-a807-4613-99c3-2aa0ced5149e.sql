@@ -1,0 +1,1 @@
+GRANT EXECUTE ON FUNCTION public.f9_policy_test(jsonb) TO authenticated, anon;

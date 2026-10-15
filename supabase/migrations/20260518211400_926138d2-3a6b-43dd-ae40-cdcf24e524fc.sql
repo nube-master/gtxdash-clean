@@ -1,0 +1,1 @@
+ALTER TABLE public.spy_offers ADD COLUMN IF NOT EXISTS sales_page_url text;

@@ -1,0 +1,1 @@
+DELETE FROM public.vturb_performance_daily WHERE date >= CURRENT_DATE - INTERVAL '7 days';

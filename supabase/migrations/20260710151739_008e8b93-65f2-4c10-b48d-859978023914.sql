@@ -1,0 +1,1 @@
+UPDATE public.app_settings SET value = to_jsonb(0::int), updated_at = now() WHERE key = 'sync_meta_batch_offset';

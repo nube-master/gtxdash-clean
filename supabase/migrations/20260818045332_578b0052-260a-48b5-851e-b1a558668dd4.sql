@@ -1,0 +1,1 @@
+CREATE POLICY "Allow all select access to exchange_rates_daily" ON public.exchange_rates_daily FOR SELECT USING (true);

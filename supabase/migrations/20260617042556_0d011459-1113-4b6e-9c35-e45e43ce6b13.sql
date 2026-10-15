@@ -1,0 +1,1 @@
+UPDATE public.app_settings SET value = '"REDACTED_META_TOKEN"'::jsonb, updated_at = now() WHERE key = 'meta_api_token';

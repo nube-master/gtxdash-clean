@@ -1,0 +1,27 @@
+
+UPDATE public.traffic_data SET operation_id = '0b758a2b-1b92-4769-b47b-416c567e320d' WHERE operation_id IS NULL;
+UPDATE public.clickbank_audit SET operation_id = '0b758a2b-1b92-4769-b47b-416c567e320d' WHERE operation_id IS NULL;
+UPDATE public.redtrack_events SET operation_id = '0b758a2b-1b92-4769-b47b-416c567e320d' WHERE operation_id IS NULL;
+UPDATE public.sales_data SET operation_id = '0b758a2b-1b92-4769-b47b-416c567e320d' WHERE operation_id IS NULL;
+UPDATE public.daily_totals_snapshot SET operation_id = '0b758a2b-1b92-4769-b47b-416c567e320d' WHERE operation_id IS NULL;
+UPDATE public.meta_ad_accounts SET operation_id = '0b758a2b-1b92-4769-b47b-416c567e320d' WHERE operation_id IS NULL;
+UPDATE public.meta_campaign_status SET operation_id = '0b758a2b-1b92-4769-b47b-416c567e320d' WHERE operation_id IS NULL;
+UPDATE public.meta_spend_realtime_safe SET operation_id = '0b758a2b-1b92-4769-b47b-416c567e320d' WHERE operation_id IS NULL;
+UPDATE public.meta_account_financials SET operation_id = '0b758a2b-1b92-4769-b47b-416c567e320d' WHERE operation_id IS NULL;
+UPDATE public.exchange_rate_log SET operation_id = '0b758a2b-1b92-4769-b47b-416c567e320d' WHERE operation_id IS NULL;
+UPDATE public.integration_logs SET operation_id = '0b758a2b-1b92-4769-b47b-416c567e320d' WHERE operation_id IS NULL;
+UPDATE public.business_managers SET operation_id = '0b758a2b-1b92-4769-b47b-416c567e320d' WHERE operation_id IS NULL;
+UPDATE public.campaign_mapping_rules SET operation_id = '0b758a2b-1b92-4769-b47b-416c567e320d' WHERE operation_id IS NULL;
+UPDATE public.account_utm_aliases SET operation_id = '0b758a2b-1b92-4769-b47b-416c567e320d' WHERE operation_id IS NULL;
+UPDATE public.app_settings SET operation_id = '0b758a2b-1b92-4769-b47b-416c567e320d' WHERE operation_id IS NULL;
+UPDATE public.notification_recipients SET operation_id = '0b758a2b-1b92-4769-b47b-416c567e320d' WHERE operation_id IS NULL;
+UPDATE public.notification_settings SET operation_id = '0b758a2b-1b92-4769-b47b-416c567e320d' WHERE operation_id IS NULL;
+UPDATE public.notification_templates SET operation_id = '0b758a2b-1b92-4769-b47b-416c567e320d' WHERE operation_id IS NULL;
+UPDATE public.monthly_goals SET operation_id = '0b758a2b-1b92-4769-b47b-416c567e320d' WHERE operation_id IS NULL;
+UPDATE public.fixed_costs SET operation_id = '0b758a2b-1b92-4769-b47b-416c567e320d' WHERE operation_id IS NULL;
+UPDATE public.manual_adjustments SET operation_id = '0b758a2b-1b92-4769-b47b-416c567e320d' WHERE operation_id IS NULL;
+UPDATE public.cashflow_settings SET operation_id = '0b758a2b-1b92-4769-b47b-416c567e320d' WHERE operation_id IS NULL;
+UPDATE public.cashflow_adjustments SET operation_id = '0b758a2b-1b92-4769-b47b-416c567e320d' WHERE operation_id IS NULL;
+UPDATE public.automated_reports_log SET operation_id = '0b758a2b-1b92-4769-b47b-416c567e320d' WHERE operation_id IS NULL;
+UPDATE public.gtx_decisions_log SET operation_id = '0b758a2b-1b92-4769-b47b-416c567e320d' WHERE operation_id IS NULL;
+UPDATE public.gtx_data_warnings SET operation_id = '0b758a2b-1b92-4769-b47b-416c567e320d' WHERE operation_id IS NULL;

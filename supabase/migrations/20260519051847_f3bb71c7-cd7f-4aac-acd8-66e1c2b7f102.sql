@@ -1,0 +1,1 @@
+UPDATE offers SET preview_image_url = NULL, preview_image_updated_at = NULL WHERE id = '363fcf7a-1944-4d43-9ab5-5aefc0734c5b';

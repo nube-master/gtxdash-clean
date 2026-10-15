@@ -1,0 +1,1 @@
+UPDATE public.pacing_settings SET value = '150'::jsonb, updated_at = now() WHERE key = 'max_actions_per_hour';

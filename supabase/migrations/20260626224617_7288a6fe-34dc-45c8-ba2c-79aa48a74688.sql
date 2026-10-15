@@ -1,0 +1,1 @@
+DROP FUNCTION IF EXISTS public.get_traffic_by_campaign_day(p_start_date date, p_end_date date);

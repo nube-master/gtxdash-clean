@@ -1,0 +1,2 @@
+ALTER TABLE public.offers ADD COLUMN IF NOT EXISTS teto_validacao_brl numeric;
+COMMENT ON COLUMN public.offers.teto_validacao_brl IS 'Teto de spend (BRL) para validação do projeto. Alertas: 80% = aviso, 100% = risco de invalidação.';

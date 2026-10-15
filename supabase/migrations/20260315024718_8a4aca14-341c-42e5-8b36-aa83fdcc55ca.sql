@@ -1,0 +1,1 @@
+UPDATE notification_templates SET is_active = true, updated_at = now() WHERE type = 'status_lucro_diario';

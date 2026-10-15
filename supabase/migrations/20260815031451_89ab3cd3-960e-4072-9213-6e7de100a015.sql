@@ -1,0 +1,121 @@
+DROP FUNCTION IF EXISTS public.get_live_pacing_campaigns(uuid);
+
+CREATE OR REPLACE FUNCTION public.get_live_pacing_campaigns(p_operation_id uuid DEFAULT NULL::uuid)
+ RETURNS TABLE(
+    id text, 
+    name text, 
+    account text, 
+    status text, 
+    effective_status text, 
+    spend numeric, 
+    revenue numeric, 
+    sales bigint, 
+    cpa numeric, 
+    roas numeric, 
+    impressions bigint, 
+    clicks bigint, 
+    ctr numeric, 
+    cpc numeric, 
+    yesterday_spend numeric, 
+    today_label text, 
+    operation_id uuid,
+    daily_budget numeric
+ )
+ LANGUAGE plpgsql
+ STABLE SECURITY DEFINER
+ SET search_path = public
+AS $function$
+ #variable_conflict use_column
+ BEGIN
+   PERFORM public.require_op_access(p_operation_id);
+   RETURN QUERY
+ WITH t AS (SELECT (now() AT TIME ZONE 'America/Sao_Paulo')::date AS d),
+   -- Regra F9-DIA3: Apenas contas com gasto nos últimos 3 dias
+   recent_spend_accounts AS (
+      SELECT DISTINCT td.account_id 
+      FROM public.traffic_data td, t
+      WHERE td.date >= t.d - 3
+        AND td.spend > 0
+   ),
+   active_accounts AS (
+     SELECT a.account_id, a.account_name FROM public.meta_ad_accounts a
+     LEFT JOIN recent_spend_accounts rsa ON rsa.account_id = a.account_id
+     WHERE a.is_active = true
+       AND (p_operation_id IS NULL OR a.operation_id = p_operation_id)
+       -- EXCEÇÃO: EDD sempre aparece; outras contas precisam de gasto recente
+       AND (a.operation_id = '1dd606e3-dac2-4064-b863-9784307c9e98' OR rsa.account_id IS NOT NULL)
+   ),
+   mcs_filtered AS (
+     SELECT 
+        m.campaign_id, 
+        m.campaign_name, 
+        m.account_id, 
+        m.status, 
+        m.effective_status, 
+        m.operation_id,
+        COALESCE(NULLIF(m.daily_budget,0), m.lifetime_budget, 0) as daily_budget
+     FROM public.meta_campaign_status m
+     JOIN active_accounts a ON a.account_id = m.account_id
+     WHERE COALESCE(UPPER(m.effective_status), UPPER(m.status), '') NOT IN ('ARCHIVED', 'DELETED')
+       AND COALESCE(UPPER(m.status), '') NOT IN ('ARCHIVED', 'DELETED')
+       -- Regra: Apenas campanhas ATIVAS (no Meta) ou que tiveram GASTO hoje
+       AND (UPPER(m.status) = 'ACTIVE' OR UPPER(m.effective_status) = 'ACTIVE')
+   ),
+   td_today AS (
+     SELECT 
+        td.account_id, 
+        td.campaign_name, 
+        SUM(td.spend)::numeric AS spend,
+        SUM(td.impressions)::bigint AS impressions, 
+        SUM(td.inline_link_clicks)::bigint AS clicks
+     FROM public.traffic_data td, t
+     WHERE td.date = t.d 
+       AND (p_operation_id IS NULL OR td.operation_id = p_operation_id)
+     GROUP BY td.account_id, td.campaign_name
+   ),
+   td_yest AS (
+     SELECT 
+        td.account_id, 
+        td.campaign_name, 
+        SUM(td.spend)::numeric AS spend
+     FROM public.traffic_data td, t
+     WHERE td.date = t.d - 1 
+       AND (p_operation_id IS NULL OR td.operation_id = p_operation_id)
+     GROUP BY td.account_id, td.campaign_name
+   ),
+   s_today AS (
+     SELECT campaign_id, SUM(sales)::bigint AS sales, SUM(revenue)::numeric AS revenue
+     FROM public.resolve_pacing_sales_attribution((SELECT d FROM t))
+     WHERE campaign_id IS NOT NULL 
+     GROUP BY campaign_id
+   )
+   SELECT
+     m.campaign_id::text AS id,
+     m.campaign_name::text AS name,
+     a.account_name::text AS account,
+     m.status::text,
+     m.effective_status::text,
+     COALESCE(td.spend, 0)::numeric AS spend,
+     COALESCE(st.revenue, 0)::numeric AS revenue,
+     COALESCE(st.sales, 0)::bigint AS sales,
+     (CASE WHEN COALESCE(st.sales,0) > 0 THEN td.spend / st.sales ELSE 0 END)::numeric AS cpa,
+     (CASE WHEN COALESCE(td.spend,0) > 0 THEN st.revenue / td.spend ELSE 0 END)::numeric AS roas,
+     COALESCE(td.impressions, 0)::bigint AS impressions,
+     COALESCE(td.clicks, 0)::bigint AS clicks,
+     (CASE WHEN COALESCE(td.impressions,0) > 0 THEN (td.clicks::numeric / td.impressions::numeric) * 100 ELSE 0 END)::numeric AS ctr,
+     (CASE WHEN COALESCE(td.clicks,0) > 0 THEN td.spend / td.clicks ELSE 0 END)::numeric AS cpc,
+     COALESCE(ty.spend, 0)::numeric AS yesterday_spend,
+     (SELECT d::text FROM t) AS today_label,
+     m.operation_id,
+     m.daily_budget
+   FROM mcs_filtered m
+   JOIN active_accounts a ON a.account_id = m.account_id
+   LEFT JOIN td_today td ON td.account_id = m.account_id AND td.campaign_name = m.campaign_name
+   LEFT JOIN td_yest ty ON ty.account_id = m.account_id AND ty.campaign_name = m.campaign_name
+   LEFT JOIN s_today st ON st.campaign_id = m.campaign_id
+   WHERE (UPPER(m.status) = 'ACTIVE' OR UPPER(m.effective_status) = 'ACTIVE' OR COALESCE(td.spend, 0) > 0);
+ END;
+$function$;
+
+GRANT EXECUTE ON FUNCTION public.get_live_pacing_campaigns(uuid) TO authenticated;
+GRANT EXECUTE ON FUNCTION public.get_live_pacing_campaigns(uuid) TO service_role;

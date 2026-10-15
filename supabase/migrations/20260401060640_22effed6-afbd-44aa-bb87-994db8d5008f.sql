@@ -1,0 +1,1 @@
+UPDATE public.notification_templates SET operation_id = NULL WHERE is_system = true;

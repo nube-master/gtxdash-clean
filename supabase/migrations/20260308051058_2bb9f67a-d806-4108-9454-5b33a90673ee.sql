@@ -1,0 +1,1 @@
+ALTER TABLE public.monthly_goals ADD COLUMN profit_goal numeric NOT NULL DEFAULT 0;

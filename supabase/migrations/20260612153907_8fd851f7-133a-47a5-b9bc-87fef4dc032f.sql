@@ -1,0 +1,6 @@
+ALTER TYPE public.offer_geo ADD VALUE IF NOT EXISTS 'HU';
+ALTER TYPE public.offer_geo ADD VALUE IF NOT EXISTS 'PL';
+ALTER TYPE public.offer_geo ADD VALUE IF NOT EXISTS 'RO';
+ALTER TYPE public.offer_geo ADD VALUE IF NOT EXISTS 'NL';
+ALTER TYPE public.offer_geo ADD VALUE IF NOT EXISTS 'PT';
+ALTER TYPE public.offer_geo ADD VALUE IF NOT EXISTS 'MX';

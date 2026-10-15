@@ -1,0 +1,1 @@
+UPDATE public.cashflow_settings SET payment_model = 'ClickBank Real', updated_at = now() WHERE month = '2026-04';

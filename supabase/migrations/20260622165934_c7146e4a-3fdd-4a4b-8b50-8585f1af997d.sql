@@ -1,0 +1,1 @@
+UPDATE operations SET enabled_features = enabled_features || '["pacing_controller"]'::jsonb WHERE NOT (enabled_features ? 'pacing_controller');

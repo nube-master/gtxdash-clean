@@ -1,0 +1,1 @@
+UPDATE public.operations SET enabled_features = enabled_features || '["ao_vivo"]'::jsonb WHERE slug = 'gtx-midia' AND NOT (enabled_features ? 'ao_vivo');

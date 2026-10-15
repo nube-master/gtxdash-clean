@@ -1,0 +1,1 @@
+UPDATE public.meta_ad_accounts SET is_active = true, updated_at = now() WHERE account_id = '1922808938357621';

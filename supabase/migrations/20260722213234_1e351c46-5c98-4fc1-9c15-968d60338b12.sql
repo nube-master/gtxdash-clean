@@ -1,0 +1,2 @@
+ALTER TABLE public.operations ADD COLUMN IF NOT EXISTS apply_meta_tax boolean NOT NULL DEFAULT true;
+UPDATE public.operations SET apply_meta_tax = false WHERE id = '0b758a2b-1b92-4769-b47b-416c567e320d';

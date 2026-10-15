@@ -1,0 +1,1 @@
+ALTER TABLE public.spy_offers ADD COLUMN IF NOT EXISTS oldest_active_ad_at timestamptz;

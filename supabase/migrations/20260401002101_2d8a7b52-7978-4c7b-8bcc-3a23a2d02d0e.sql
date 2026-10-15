@@ -1,0 +1,1 @@
+ALTER TABLE public.talent_applications ADD COLUMN instagram text NOT NULL DEFAULT '';
